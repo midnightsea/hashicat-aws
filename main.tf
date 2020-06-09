@@ -123,7 +123,9 @@ resource aws_instance "hashicat" {
   vpc_security_group_ids      = [aws_security_group.hashicat.id]
 
   tags = {
-    Name = "${var.prefix}-hashicat-instance"
+    Name = "${var.prefix}-hashicat-instance",
+    Billable = "true",
+    Department = "devops"
   }
 }
 
@@ -168,7 +170,7 @@ resource "null_resource" "configure-cat-app" {
       "chmod +x *.sh",
       "PLACEHOLDER=${var.placeholder} WIDTH=${var.width} HEIGHT=${var.height} PREFIX=${var.prefix} ./deploy_app.sh",
     ]
-
+###
     connection {
       type        = "ssh"
       user        = "ubuntu"
